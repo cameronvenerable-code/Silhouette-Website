@@ -191,7 +191,7 @@ section{position:relative}
 .sec-body{font-size:16px;color:var(--muted);line-height:1.75;max-width:560px}
 
 /* â”€â”€ WHY SOCIAL â”€â”€ */
-.why{padding:100px 0;background:var(--s1)}
+.why{padding:100px 0;background:var(--s1);position:relative!important;overflow:hidden!important}
 .why-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
 .why-stats{display:flex;flex-direction:column;gap:24px;margin-top:40px}
 .why-stat{
@@ -668,7 +668,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 /* â”€â”€ STARFIELD SECTION â”€â”€ */
 .starfield-section{position:relative;overflow:hidden}
-#starfieldCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#fluidParticlesCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 
 /* â”€â”€ FAQ SECTION â”€â”€ */
 .faq-section{padding:100px 0;background:#000;position:relative;overflow:hidden}
@@ -858,30 +858,9 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 .about-card p{font-size:17px;color:var(--muted);line-height:1.8;text-align:center;margin:0}
 .about-heading{font-family:var(--head);font-size:clamp(28px,4vw,48px);font-weight:800;color:var(--text);line-height:1.08;letter-spacing:-0.035em;margin-bottom:20px;text-align:center}
 
-/* â”€â”€ WARP BACKGROUND (about section) â”€â”€ */
-.warp-bg{
-  position:absolute;inset:0;pointer-events:none;
-  overflow:hidden;clip-path:inset(0);
-  perspective:100px;transform-style:preserve-3d;z-index:0;
-}
-.warp-plane{
-  position:absolute;overflow:hidden;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.065) 0 1px,transparent 1px 100%),
-    linear-gradient(90deg,rgba(255,255,255,0.065) 0 1px,transparent 1px 100%);
-  background-size:5% 5%;
-}
-.warp-top{top:0;left:0;width:100%;height:500%;transform-origin:50% 0%;transform:rotateX(-90deg)}
-.warp-bottom{bottom:0;left:0;width:100%;height:500%;transform-origin:50% 100%;transform:rotateX(90deg)}
-.warp-left{top:0;left:0;height:100%;width:500%;transform-origin:0% 50%;transform:rotateY(90deg)}
-.warp-right{top:0;right:0;height:100%;width:500%;transform-origin:100% 50%;transform:rotateY(-90deg)}
-.warp-beam{position:absolute;top:0;border-radius:2px 2px 0 0;opacity:0;animation:warpBeamUp var(--wbd,3s) var(--wbdelay,0s) linear infinite}
-@keyframes warpBeamUp{
-  0%{opacity:0;transform:translateX(-50%) translateY(500%)}
-  5%{opacity:0.85}
-  85%{opacity:0.65}
-  100%{opacity:0;transform:translateX(-50%) translateY(-100%)}
-}
+/* -- GLSL HILLS (about section) -- */
+#glslHillsCanvas{display:block}
+
 
 /* â”€â”€ SERVICES: GLITTER BG â”€â”€ */
 .services{position:relative!important;overflow:hidden!important}
@@ -1079,54 +1058,15 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 </div>
 
 
-<!-- â•â•â•â• WHY SOCIAL MEDIA â•â•â•â• -->
-<section class="why" id="why">
-  <div class="wrap">
-    <div class="why-inner">
-      <div>
-        <div class="sec-eyebrow" style="text-align:center">Why Social Media</div>
-        <h2 class="sec-title">Here's why social media <em>should be working</em> for your business.</h2>
-        <p class="sec-body" style="margin-bottom:0">The data is clear. Your clients are online, they're watching video, and they're forming opinions about who to call before they ever reach out. The only question is whether they're finding you or your competitor.</p>
-
-        <div class="why-stats">
-          <div class="why-stat">
-            <div class="why-num">78%</div>
-            <div class="why-stat-text">
-              <h4>Buyers research on social before purchasing</h4>
-              <p>A significant portion of your potential clients are watching your competitors' videos right now. If you're not in that research phase, you're losing clients before a connection ever starts.</p>
-            </div>
-          </div>
-          <div class="why-stat">
-            <div class="why-num">59%</div>
-            <div class="why-stat-text">
-              <h4>Consumers discover new businesses via social</h4>
-              <p>Social media outperforms traditional search and TV in brand discovery. Short-form video is where your next client is going to find you — not billboards, radio, or paid ads.</p>
-            </div>
-          </div>
-          <div class="why-stat">
-            <div class="why-num">82%</div>
-            <div class="why-stat-text">
-              <h4>Positive social experiences drive referrals</h4>
-              <p>When people watch your videos, they feel like they know you. If their friend needs a service, you're the first name that comes to mind because your face has been in their feed for months.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="why-right">
-        <div class="why-block">
-          <h3>Your competition is already there. <em>So why aren't you?</em></h3>
-          <p>About 96% of American small businesses use social media in 2026. The question is no longer whether you should be on social media. The question is whether you're showing up consistently enough to win. Most competitors are posting, but not at the volume, quality, or consistency that actually moves the algorithm. That gap is your opportunity.</p>
-        </div>
-        <div class="why-block">
-          <h3><em>The Algorithm Rewards Volume.</em></h3>
-          <p>Posting 3 times a day, every day, tells the algorithm you're a serious creator worth promoting. Platforms like TikTok and Instagram were designed to surface high-volume, consistent accounts to new audiences. 90–270 videos per month isn't just a strong content strategy — it's platform domination.</p>
-        </div>
-        <div class="why-block">
-          <h3>Audiences are built in <em>silence</em>, then noticed suddenly.</h3>
-          <p>Most business owners quit social media after 60–90 days because they don't see immediate results. But social media growth is not linear — it's exponential. The accounts that stick through the first few months are the ones that suddenly explode in 6–9 months when the algorithm catches on. Silhouette A.I. keeps your content consistent throughout the entire initial growth period and even at scale.</p>
-        </div>
-      </div>
+<!-- â•â•â•â• ABOUT â•â•â•â• -->
+<section class="about-section" id="about">
+  <canvas id="glslHillsCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+  <div class="about-inner" style="position:relative;z-index:2">
+    <div class="about-card">
+      <h2 class="about-heading" style="margin-bottom:20px">We Are Silhouette</h2>
+      <p>Silhouette A.I. Automation is a done-for-you content production company built for business owners who understand that visibility drives growth — but can't afford to sacrifice the time it demands.</p>
+      <p>We engineer photorealistic AI avatars modeled on your face, your voice, and your brand identity, then deploy them across every major short-form video platform every single day.</p>
+      <p>The result: a consistently growing digital presence that compounds over time, puts your name in front of new audiences around the clock, and positions you as the authority in your market — all without pulling you away from the work that actually runs your business.</p>
     </div>
   </div>
 </section>
@@ -1428,7 +1368,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 <!-- â•â•â•â• WHY IT WORKS â•â•â•â• -->
 <section class="whyworks starfield-section" id="industries" style="position:relative;overflow:hidden">
-  <canvas id="starfieldCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none"></canvas>
+  <canvas id="fluidParticlesCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none"></canvas>
   <div class="wrap" style="position:relative;z-index:2">
     <div class="whyworks-inner">
       <div>
@@ -1506,21 +1446,55 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 </section>
 
 
-<!-- â•â•â•â• ABOUT â•â•â•â• -->
-<section class="about-section" id="about">
-  <!-- Warp background -->
-  <div class="warp-bg" id="warpBg">
-    <div class="warp-plane warp-top" id="warpTop"></div>
-    <div class="warp-plane warp-bottom" id="warpBottom"></div>
-    <div class="warp-plane warp-left" id="warpLeft"></div>
-    <div class="warp-plane warp-right" id="warpRight"></div>
-  </div>
-  <div class="about-inner" style="position:relative;z-index:2">
-    <div class="about-card">
-      <h2 class="about-heading" style="margin-bottom:20px">We Are Silhouette</h2>
-      <p>Silhouette A.I. Automation is a done-for-you content production company built for business owners who understand that visibility drives growth — but can't afford to sacrifice the time it demands.</p>
-      <p>We engineer photorealistic AI avatars modeled on your face, your voice, and your brand identity, then deploy them across every major short-form video platform every single day.</p>
-      <p>The result: a consistently growing digital presence that compounds over time, puts your name in front of new audiences around the clock, and positions you as the authority in your market — all without pulling you away from the work that actually runs your business.</p>
+<!-- â•â•â•â• WHY SOCIAL MEDIA â•â•â•â• -->
+<section class="why" id="why">
+  <canvas id="whyWaveCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+  <div class="wrap">
+    <div class="why-inner">
+      <div>
+        <div class="sec-eyebrow" style="text-align:center">Why Social Media</div>
+        <h2 class="sec-title">Here's why social media <em>should be working</em> for your business.</h2>
+        <p class="sec-body" style="margin-bottom:0">The data is clear. Your clients are online, they're watching video, and they're forming opinions about who to call before they ever reach out. The only question is whether they're finding you or your competitor.</p>
+
+        <div class="why-stats">
+          <div class="why-stat">
+            <div class="why-num">78%</div>
+            <div class="why-stat-text">
+              <h4>Buyers research on social before purchasing</h4>
+              <p>A significant portion of your potential clients are watching your competitors' videos right now. If you're not in that research phase, you're losing clients before a connection ever starts.</p>
+            </div>
+          </div>
+          <div class="why-stat">
+            <div class="why-num">59%</div>
+            <div class="why-stat-text">
+              <h4>Consumers discover new businesses via social</h4>
+              <p>Social media outperforms traditional search and TV in brand discovery. Short-form video is where your next client is going to find you — not billboards, radio, or paid ads.</p>
+            </div>
+          </div>
+          <div class="why-stat">
+            <div class="why-num">82%</div>
+            <div class="why-stat-text">
+              <h4>Positive social experiences drive referrals</h4>
+              <p>When people watch your videos, they feel like they know you. If their friend needs a service, you're the first name that comes to mind because your face has been in their feed for months.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-right">
+        <div class="why-block">
+          <h3>Your competition is already there. <em>So why aren't you?</em></h3>
+          <p>About 96% of American small businesses use social media in 2026. The question is no longer whether you should be on social media. The question is whether you're showing up consistently enough to win. Most competitors are posting, but not at the volume, quality, or consistency that actually moves the algorithm. That gap is your opportunity.</p>
+        </div>
+        <div class="why-block">
+          <h3><em>The Algorithm Rewards Volume.</em></h3>
+          <p>Posting 3 times a day, every day, tells the algorithm you're a serious creator worth promoting. Platforms like TikTok and Instagram were designed to surface high-volume, consistent accounts to new audiences. 90–270 videos per month isn't just a strong content strategy — it's platform domination.</p>
+        </div>
+        <div class="why-block">
+          <h3>Audiences are built in <em>silence</em>, then noticed suddenly.</h3>
+          <p>Most business owners quit social media after 60–90 days because they don't see immediate results. But social media growth is not linear — it's exponential. The accounts that stick through the first few months are the ones that suddenly explode in 6–9 months when the algorithm catches on. Silhouette A.I. keeps your content consistent throughout the entire initial growth period and even at scale.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1946,92 +1920,113 @@ window.addEventListener('scroll', () => {
   }
 })();
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// STARFIELD BACKGROUND (whyworks section)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════════════
+// FLUID PARTICLES BACKGROUND (industries section)
+// ════════════════════════════════════════
 (function(){
-  const canvas = document.getElementById('starfieldCanvas');
+  const canvas = document.getElementById('fluidParticlesCanvas');
   if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const QUANTITY = 512, SPEED = 1;
-  let w, h, stars = [];
-  let cx, cy, z, ratio;
-  let mouse = {x:0,y:0}, cursor = {x:0,y:0};
+  const ctx = canvas.getContext('2d', {alpha:true});
+  if(!ctx) return;
+
+  const PARTICLE_COUNT = 2000;
+  const NOISE_INTENSITY = 0.003;
+  const SIZE_MIN = 0.5, SIZE_MAX = 2;
+
+  const permutation = [
+    151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,
+    36,103,30,69,142,8,99,37,240,21,10,23,190,6,148,247,120,
+    234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
+    88,237,149,56,87,174,20,125,136,171,168,68,175,74,165,71,
+    134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,133,
+    230,220,105,92,41,55,46,245,40,244,102,143,54,65,25,63,161,
+    1,216,80,73,209,76,132,187,208,89,18,169,200,196,135,130,
+    116,188,159,86,164,100,109,198,173,186,3,64,52,217,226,250,
+    124,123,5,202,38,147,118,126,255,82,85,212,207,206,59,227,
+    47,16,58,17,182,189,28,42,223,183,170,213,119,248,152,2,44,
+    154,163,70,221,153,101,155,167,43,172,9,129,22,39,253,19,98,
+    108,110,79,113,224,232,178,185,112,104,218,246,97,228,251,34,
+    242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,14,
+    239,107,49,192,214,31,181,199,106,157,184,84,204,176,115,121,
+    50,45,127,4,150,254,138,236,205,93,222,114,67,29,24,72,243,
+    141,128,195,78,66,215,61,156,180
+  ];
+  const p = new Array(512);
+  for(let i=0;i<256;i++) p[256+i] = p[i] = permutation[i];
+
+  function fade(t){ return t*t*t*(t*(t*6-15)+10); }
+  function lerp(t,a,b){ return a+t*(b-a); }
+  function grad(hash,x,y,z){
+    const h=hash&15, u=h<8?x:y, v=h<4?y:(h===12||h===14?x:z);
+    return((h&1)===0?u:-u)+((h&2)===0?v:-v);
+  }
+  function noise3(x,y,z){
+    const X=Math.floor(x)&255, Y=Math.floor(y)&255, Z=Math.floor(z)&255;
+    x-=Math.floor(x); y-=Math.floor(y); z-=Math.floor(z);
+    const u=fade(x),v=fade(y),w=fade(z);
+    const A=p[X]+Y,AA=p[A]+Z,AB=p[A+1]+Z,B=p[X+1]+Y,BA=p[B]+Z,BB=p[B+1]+Z;
+    return lerp(w,
+      lerp(v,lerp(u,grad(p[AA],x,y,z),grad(p[BA],x-1,y,z)),
+              lerp(u,grad(p[AB],x,y-1,z),grad(p[BB],x-1,y-1,z))),
+      lerp(v,lerp(u,grad(p[AA+1],x,y,z-1),grad(p[BA+1],x-1,y,z-1)),
+              lerp(u,grad(p[AB+1],x,y-1,z-1),grad(p[BB+1],x-1,y-1,z-1))));
+  }
 
   function resize(){
     const par = canvas.parentElement;
-    w = canvas.width = par.offsetWidth;
-    h = canvas.height = par.offsetHeight;
-    cx = w/2; cy = h/2;
-    z = (w+h)/2;
-    ratio = QUANTITY/2;
-    if(cursor.x===0||cursor.y===0){cursor.x=cx;cursor.y=cy}
-    if(mouse.x===0&&mouse.y===0){mouse.x=cursor.x-cx;mouse.y=cursor.y-cy}
+    canvas.width = par.offsetWidth;
+    canvas.height = par.offsetHeight;
   }
 
-  function bigBang(){
-    stars = [];
-    for(let i=0;i<QUANTITY;i++){
-      stars.push([
-        Math.random()*w*2 - cx*2,
-        Math.random()*h*2 - cy*2,
-        Math.round(Math.random()*z),
-        0,0,0,0,true
-      ]);
+  let particles = [];
+  function initParticles(){
+    particles = [];
+    for(let i=0;i<PARTICLE_COUNT;i++){
+      particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        size: Math.random()*(SIZE_MAX-SIZE_MIN)+SIZE_MIN,
+        vx:0, vy:0,
+        life: Math.random()*100,
+        maxLife: 100+Math.random()*50
+      });
     }
   }
 
-  function update(){
-    mouse.x = (cursor.x - cx) / 1;
-    mouse.y = (cursor.y - cy) / 1;
-    stars = stars.map(s=>{
-      const n=[...s];
-      n[7]=true; n[5]=n[3]; n[6]=n[4];
-      n[0] += mouse.x >> 4;
-      if(n[0]>cx<<1){n[0]-=w<<1;n[7]=false}
-      if(n[0]<-(cx<<1)){n[0]+=w<<1;n[7]=false}
-      n[1] += mouse.y >> 4;
-      if(n[1]>cy<<1){n[1]-=h<<1;n[7]=false}
-      if(n[1]<-(cy<<1)){n[1]+=h<<1;n[7]=false}
-      n[2] -= SPEED;
-      if(n[2]>z){n[2]-=z;n[7]=false}
-      if(n[2]<0){n[2]+=z;n[7]=false}
-      n[3] = cx + (n[0]/n[2])*ratio;
-      n[4] = cy + (n[1]/n[2])*ratio;
-      return n;
-    });
-  }
-
-  function draw(){
-    ctx.fillStyle = 'rgba(8,8,12,0.3)';
-    ctx.fillRect(0,0,w,h);
-    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
-    const colorRatio = 1/z;
-    stars.forEach(s=>{
-      if(s[5]>0&&s[5]<w&&s[6]>0&&s[6]<h&&s[7]){
-        ctx.lineWidth = (1 - colorRatio*s[2]) * 2;
-        ctx.beginPath();
-        ctx.moveTo(s[5],s[6]);
-        ctx.lineTo(s[3],s[4]);
-        ctx.stroke();
-        ctx.closePath();
+  function animate(){
+    const t = Date.now()*0.0001;
+    ctx.fillStyle = 'rgba(0,0,0,0.12)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    for(const pt of particles){
+      pt.life++;
+      if(pt.life > pt.maxLife){
+        pt.life=0;
+        pt.x=Math.random()*canvas.width;
+        pt.y=Math.random()*canvas.height;
       }
-    });
-    requestAnimationFrame(animLoop);
+      const opacity = Math.sin((pt.life/pt.maxLife)*Math.PI)*0.15;
+      const n = noise3(pt.x*NOISE_INTENSITY, pt.y*NOISE_INTENSITY, t);
+      const angle = n*Math.PI*4;
+      pt.vx = Math.cos(angle)*2;
+      pt.vy = Math.sin(angle)*2;
+      pt.x += pt.vx;
+      pt.y += pt.vy;
+      if(pt.x<0) pt.x=canvas.width;
+      if(pt.x>canvas.width) pt.x=0;
+      if(pt.y<0) pt.y=canvas.height;
+      if(pt.y>canvas.height) pt.y=0;
+      ctx.fillStyle = `rgba(255,255,255,${opacity})`;
+      ctx.beginPath();
+      ctx.arc(pt.x,pt.y,pt.size,0,Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(animate);
   }
-
-  function animLoop(){ update(); draw(); }
-
-  const par = canvas.parentElement;
-  par && par.addEventListener('mousemove', e=>{
-    cursor.x = e.clientX;
-    cursor.y = e.clientY;
-  });
 
   resize();
-  bigBang();
-  animLoop();
-  window.addEventListener('resize', ()=>{ resize(); bigBang(); });
+  initParticles();
+  animate();
+  window.addEventListener('resize',()=>{ resize(); initParticles(); });
 })();
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -2133,6 +2128,7 @@ window.addEventListener('scroll', () => {
 })();
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script>
 
 
@@ -2256,41 +2252,118 @@ window.addEventListener('scroll', () => {
   });
 })();
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// WARP BACKGROUND: We Are Silhouette section
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════════════
+// GLSL HILLS BACKGROUND: We Are Silhouette section
+// ════════════════════════════════════════
 (function(){
-  const bg = document.getElementById('warpBg');
-  if(!bg) return;
+  const canvas = document.getElementById('glslHillsCanvas');
+  if(!canvas) return;
+  if(typeof THREE === 'undefined') return;
 
-  const BEAMS = 3; // beams per side
-  const BEAM_W = 5; // % width of each beam
-  const hues = [210, 270, 180, 310, 145, 60];
-  const step = Math.floor(100 / BEAM_W) / BEAMS;
+  const renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:false, alpha:true});
+  renderer.setClearColor(0x000000, 0);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 1, 10000);
+  camera.position.set(0, 16, 125);
+  camera.lookAt(new THREE.Vector3(0, 28, 0));
 
-  function addBeams(planeId) {
-    const plane = document.getElementById(planeId);
-    if(!plane) return;
-    for(let pass = 0; pass < 2; pass++) {
-      for(let i = 0; i < BEAMS; i++) {
-        const xBase = Math.floor(i * step + pass * (step / 2));
-        const xPct = Math.min(xBase * BEAM_W, 95);
-        const delay = (Math.random() * 3 + pass * 0.8).toFixed(2);
-        const dur = (2.5 + Math.random() * 2.5).toFixed(1);
-        const hue = hues[(i + pass * 2) % hues.length];
-        const ar = 2 + Math.floor(Math.random() * 7);
-        const el = document.createElement('div');
-        el.className = 'warp-beam';
-        el.style.cssText = `left:${xPct}%;width:${BEAM_W}%;aspect-ratio:1/${ar};background:linear-gradient(hsl(${hue} 80% 62%),transparent);--wbd:${dur}s;--wbdelay:${delay}s`;
-        plane.appendChild(el);
-      }
+  const uniforms = { time: {type:'f', value:0} };
+
+  const vertexShader = `
+    #define GLSLIFY 1
+    attribute vec3 position;
+    uniform mat4 projectionMatrix;
+    uniform mat4 modelViewMatrix;
+    uniform float time;
+    varying vec3 vPosition;
+    mat4 rotateMatrixX(float r){
+      return mat4(1,0,0,0, 0,cos(r),-sin(r),0, 0,sin(r),cos(r),0, 0,0,0,1);
     }
+    vec3 mod289v3(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
+    vec4 mod289v4(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
+    vec4 permute(vec4 x){return mod289v4(((x*34.0)+1.0)*x);}
+    vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+    vec3 fade(vec3 t){return t*t*t*(t*(t*6.0-15.0)+10.0);}
+    float cnoise(vec3 P){
+      vec3 Pi0=floor(P),Pi1=Pi0+vec3(1.0);
+      Pi0=mod289v3(Pi0);Pi1=mod289v3(Pi1);
+      vec3 Pf0=fract(P),Pf1=Pf0-vec3(1.0);
+      vec4 ix=vec4(Pi0.x,Pi1.x,Pi0.x,Pi1.x);
+      vec4 iy=vec4(Pi0.yy,Pi1.yy);
+      vec4 iz0=Pi0.zzzz,iz1=Pi1.zzzz;
+      vec4 ixy=permute(permute(ix)+iy);
+      vec4 ixy0=permute(ixy+iz0),ixy1=permute(ixy+iz1);
+      vec4 gx0=ixy0*(1.0/7.0),gy0=fract(floor(gx0)*(1.0/7.0))-0.5;
+      gx0=fract(gx0);
+      vec4 gz0=vec4(0.5)-abs(gx0)-abs(gy0),sz0=step(gz0,vec4(0.0));
+      gx0-=sz0*(step(0.0,gx0)-0.5);gy0-=sz0*(step(0.0,gy0)-0.5);
+      vec4 gx1=ixy1*(1.0/7.0),gy1=fract(floor(gx1)*(1.0/7.0))-0.5;
+      gx1=fract(gx1);
+      vec4 gz1=vec4(0.5)-abs(gx1)-abs(gy1),sz1=step(gz1,vec4(0.0));
+      gx1-=sz1*(step(0.0,gx1)-0.5);gy1-=sz1*(step(0.0,gy1)-0.5);
+      vec3 g000=vec3(gx0.x,gy0.x,gz0.x),g100=vec3(gx0.y,gy0.y,gz0.y);
+      vec3 g010=vec3(gx0.z,gy0.z,gz0.z),g110=vec3(gx0.w,gy0.w,gz0.w);
+      vec3 g001=vec3(gx1.x,gy1.x,gz1.x),g101=vec3(gx1.y,gy1.y,gz1.y);
+      vec3 g011=vec3(gx1.z,gy1.z,gz1.z),g111=vec3(gx1.w,gy1.w,gz1.w);
+      vec4 norm0=taylorInvSqrt(vec4(dot(g000,g000),dot(g010,g010),dot(g100,g100),dot(g110,g110)));
+      g000*=norm0.x;g010*=norm0.y;g100*=norm0.z;g110*=norm0.w;
+      vec4 norm1=taylorInvSqrt(vec4(dot(g001,g001),dot(g011,g011),dot(g101,g101),dot(g111,g111)));
+      g001*=norm1.x;g011*=norm1.y;g101*=norm1.z;g111*=norm1.w;
+      float n000=dot(g000,Pf0),n100=dot(g100,vec3(Pf1.x,Pf0.yz));
+      float n010=dot(g010,vec3(Pf0.x,Pf1.y,Pf0.z)),n110=dot(g110,vec3(Pf1.xy,Pf0.z));
+      float n001=dot(g001,vec3(Pf0.xy,Pf1.z)),n101=dot(g101,vec3(Pf1.x,Pf0.y,Pf1.z));
+      float n011=dot(g011,vec3(Pf0.x,Pf1.yz)),n111=dot(g111,Pf1);
+      vec3 fade_xyz=fade(Pf0);
+      vec4 n_z=mix(vec4(n000,n100,n010,n110),vec4(n001,n101,n011,n111),fade_xyz.z);
+      vec2 n_yz=mix(n_z.xy,n_z.zw,fade_xyz.y);
+      return 2.2*mix(n_yz.x,n_yz.y,fade_xyz.x);
+    }
+    void main(void){
+      vec3 p=(rotateMatrixX(radians(90.0))*vec4(position,1.0)).xyz;
+      float s=sin(radians(p.x/128.0*90.0));
+      vec3 np=p+vec3(0.0,0.0,time*-30.0);
+      float n1=cnoise(np*0.08),n2=cnoise(np*0.06),n3=cnoise(np*0.4);
+      vec3 lp=p+vec3(0.0,n1*s*8.0+n2*s*8.0+n3*(abs(s)*2.0+0.5)+pow(s,2.0)*40.0,0.0);
+      vPosition=lp;
+      gl_Position=projectionMatrix*modelViewMatrix*vec4(lp,1.0);
+    }
+  `;
+
+  const fragmentShader = `
+    precision highp float;
+    varying vec3 vPosition;
+    void main(void){
+      float opacity=(96.0-length(vPosition))/256.0*0.6;
+      gl_FragColor=vec4(vec3(0.6),opacity);
+    }
+  `;
+
+  const mesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(256,256,256,256),
+    new THREE.RawShaderMaterial({uniforms,vertexShader,fragmentShader,transparent:true})
+  );
+  scene.add(mesh);
+
+  const clock = new THREE.Clock();
+
+  function resize(){
+    const sec = canvas.parentElement;
+    const w = sec.offsetWidth, h = sec.offsetHeight;
+    canvas.width = w; canvas.height = h;
+    camera.aspect = w/h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
   }
 
-  addBeams('warpTop');
-  addBeams('warpBottom');
-  addBeams('warpLeft');
-  addBeams('warpRight');
+  function loop(){
+    uniforms.time.value += clock.getDelta()*0.5;
+    renderer.render(scene, camera);
+    requestAnimationFrame(loop);
+  }
+
+  resize();
+  loop();
+  window.addEventListener('resize', resize);
 })();
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -2309,6 +2382,71 @@ window.addEventListener('scroll', () => {
   function draw(){ ctx.clearRect(0,0,w,h); const t=performance.now()/1000; sparks.forEach(s=>{ const a=Math.pow(Math.max(0,Math.sin(t*s.speed*Math.PI*2+s.phase)),12); if(a<0.01)return; ctx.save(); ctx.globalAlpha=a*0.9; ctx.shadowBlur=s.size*8; ctx.shadowColor=s.color; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s.x,s.y,s.size,0,Math.PI*2); ctx.fill(); ctx.restore(); }); requestAnimationFrame(draw); }
   resize(); init(); draw();
   window.addEventListener('resize',()=>{ resize(); init(); });
+})();
+// ════════════════════════════════════════
+// DYNAMIC WAVE CANVAS: why section
+// ════════════════════════════════════════
+(function(){
+  const canvas = document.getElementById('whyWaveCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const SCALE = 2;
+  let width, height, imageData, data;
+  const startTime = Date.now();
+
+  const SIN_TABLE = new Float32Array(1024);
+  const COS_TABLE = new Float32Array(1024);
+  for(let i=0;i<1024;i++){
+    const a=(i/1024)*Math.PI*2;
+    SIN_TABLE[i]=Math.sin(a);
+    COS_TABLE[i]=Math.cos(a);
+  }
+  function fsin(x){ return SIN_TABLE[Math.floor(((x%(Math.PI*2))/(Math.PI*2))*1024)&1023]; }
+  function fcos(x){ return COS_TABLE[Math.floor(((x%(Math.PI*2))/(Math.PI*2))*1024)&1023]; }
+
+  function resize(){
+    const sec = canvas.parentElement;
+    canvas.width = sec.offsetWidth;
+    canvas.height = sec.offsetHeight;
+    width = Math.floor(canvas.width/SCALE);
+    height = Math.floor(canvas.height/SCALE);
+    imageData = ctx.createImageData(width, height);
+    data = imageData.data;
+  }
+
+  function render(){
+    const time = (Date.now()-startTime)*0.001;
+    for(let y=0;y<height;y++){
+      for(let x=0;x<width;x++){
+        const ux=(2*x-width)/height, uy=(2*y-height)/height;
+        let a=0, d=0;
+        for(let i=0;i<4;i++){
+          a+=fcos(i-d+time*0.5-a*ux);
+          d+=fsin(i*uy+a);
+        }
+        const wave=(fsin(a)+fcos(d))*0.5;
+        const intensity=0.3+0.4*wave;
+        const base=0.1+0.15*fcos(ux+uy+time*0.3);
+        const blue=0.2*fsin(a*1.5+time*0.2);
+        const purple=0.15*fcos(d*2+time*0.1);
+        const r=Math.max(0,Math.min(1,base+purple*0.8))*intensity;
+        const g=Math.max(0,Math.min(1,base+blue*0.6))*intensity;
+        const b=Math.max(0,Math.min(1,base+blue*1.2+purple*0.4))*intensity;
+        const idx=(y*width+x)*4;
+        data[idx]=r*255; data[idx+1]=g*255; data[idx+2]=b*255; data[idx+3]=255;
+      }
+    }
+    ctx.putImageData(imageData,0,0);
+    if(SCALE>1){
+      ctx.imageSmoothingEnabled=false;
+      ctx.drawImage(canvas,0,0,width,height,0,0,canvas.width,canvas.height);
+    }
+    requestAnimationFrame(render);
+  }
+
+  resize();
+  render();
+  window.addEventListener('resize', resize);
 })();
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
