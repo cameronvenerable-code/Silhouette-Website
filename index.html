@@ -842,20 +842,137 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 .why-block p,.ind-card p,.step p,.serv-item p{text-align:center}
 
 /* ── ABOUT CARD (shader section) ── */
-.about-section{position:relative!important;overflow:hidden!important;background:var(--s1)!important}
+.about-section{position:relative!important;overflow:hidden!important;background:#050505!important}
 .about-card{
-  background:rgba(5,5,5,0.75);
+  background:rgba(5,5,5,0.78);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
   border:1px solid rgba(255,255,255,0.1);
   border-radius:20px;
   padding:40px 36px;
-  margin-top:12px;
+  margin-top:0;
   display:flex;
   flex-direction:column;
   gap:18px;
 }
 .about-card p{font-size:17px;color:var(--muted);line-height:1.8;text-align:center;margin:0}
+.about-heading{font-family:var(--head);font-size:clamp(28px,4vw,48px);font-weight:800;color:var(--text);line-height:1.08;letter-spacing:-0.035em;margin-bottom:20px;text-align:center}
+
+/* ── BEAM GRID (about section) ── */
+.beam-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.beam-floor-plane{
+  position:absolute;left:0;width:100%;
+  overflow:hidden;
+  transform-style:preserve-3d;
+}
+.beam-floor-top{top:0;height:600%;transform-origin:50% 0%;transform:perspective(180px) rotateX(-82deg)}
+.beam-grid-inner{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.06) 1px,transparent 1px);
+  background-size:9% 9%;
+}
+.beam-el{
+  position:absolute;top:0;
+  transform:translateX(-50%) translateY(800%);
+  border-radius:2px 2px 0 0;
+  animation:beamUp var(--bd,3s) var(--bdelay,0s) linear infinite;
+  opacity:0;
+}
+@keyframes beamUp{
+  0%{transform:translateX(-50%) translateY(800%);opacity:0}
+  5%{opacity:0.9}
+  85%{opacity:0.7}
+  100%{transform:translateX(-50%) translateY(-200%);opacity:0}
+}
+
+/* ── SERVICES: GLITTER BG ── */
+.services{position:relative!important;overflow:hidden!important}
+#glitterCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen}
+.services .wrap{position:relative;z-index:2}
+.services-header{position:relative;z-index:2}
+
+/* ── GLOW CARDS (services section) ── */
+.glow-serv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.glow-serv-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.glow-serv-grid{grid-template-columns:1fr}}
+.glow-card{
+  background:var(--s2);border-radius:14px;padding:32px 24px;
+  position:relative;overflow:hidden;border:1px solid var(--border);
+  cursor:default;transition:border-color 0.4s;
+}
+.glow-card:hover{border-color:rgba(255,255,255,0.18)}
+.glow-spot{
+  position:absolute;inset:0;border-radius:14px;pointer-events:none;
+  background:radial-gradient(280px 280px at var(--cx,50%) var(--cy,50%),rgba(74,159,212,0.25),transparent 70%);
+  opacity:0;transition:opacity 0.3s;
+}
+.glow-card:hover .glow-spot{opacity:1}
+.glow-border{
+  position:absolute;inset:-1px;border-radius:15px;pointer-events:none;
+  background:transparent;
+  border:1.5px solid transparent;
+  background-image:radial-gradient(220px 220px at var(--cx,50%) var(--cy,50%),rgba(255,255,255,0.28),transparent 70%);
+  background-origin:border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;mask-composite:exclude;
+  opacity:0;transition:opacity 0.3s;
+}
+.glow-card:hover .glow-border{opacity:1}
+.glow-card-body{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.glow-card .serv-icon{
+  width:44px;height:44px;border-radius:11px;
+  background:var(--blue-light);border:1px solid var(--blue-border);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+}
+.glow-card h3{font-family:var(--head);font-size:16px;font-weight:700;margin-bottom:8px;line-height:1.3;text-align:center;color:var(--text)}
+.glow-card p{font-size:13px;color:var(--muted);line-height:1.65;text-align:center}
+
+/* ── SKEW CARDS (process section) ── */
+.skew-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:36px 28px;margin-bottom:0}
+.skew-card{position:relative;width:280px;min-height:360px;flex-shrink:0;margin:20px 0}
+.skew-card-panel,.skew-card-blur{
+  position:absolute;top:0;left:50px;width:50%;height:100%;border-radius:10px;
+  transform:skewX(15deg);
+  transition:transform 0.5s ease,left 0.5s ease,width 0.5s ease;
+}
+.skew-card-blur{filter:blur(28px);opacity:0.6}
+.skew-card:hover .skew-card-panel,.skew-card:hover .skew-card-blur{
+  transform:skewX(0deg);left:20px;width:calc(100% - 90px)
+}
+.skew-card-blob-tl,.skew-card-blob-br{
+  position:absolute;width:0;height:0;border-radius:10px;opacity:0;
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);transition:all 0.5s ease;z-index:10;pointer-events:none;
+}
+.skew-card-blob-tl{top:0;left:0}
+.skew-card-blob-br{bottom:0;right:0}
+.skew-card:hover .skew-card-blob-tl{top:-50px;left:50px;width:100px;height:100px;opacity:1}
+.skew-card:hover .skew-card-blob-br{bottom:-50px;right:50px;width:100px;height:100px;opacity:1}
+.skew-card-content{
+  position:relative;z-index:20;left:0;padding:22px 30px;
+  background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);
+  box-shadow:0 8px 32px rgba(0,0,0,0.25);border-radius:10px;color:#fff;
+  min-height:100%;display:flex;flex-direction:column;
+  transition:left 0.5s ease,padding 0.5s ease;
+}
+.skew-card:hover .skew-card-content{left:-22px;padding:38px 30px}
+.skew-card-step{font-size:10px;font-weight:700;letter-spacing:0.14em;color:rgba(255,255,255,0.45);margin-bottom:10px;text-transform:uppercase}
+.skew-card-icon{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.skew-card-content h3{font-family:var(--head);font-size:18px;font-weight:700;margin-bottom:10px;line-height:1.25;text-align:left}
+.skew-card-content p{font-size:13px;line-height:1.7;color:rgba(255,255,255,0.75);text-align:left;margin:0}
+@keyframes blobFloat{0%,100%{transform:translateY(10px)}50%{transform:translateY(-10px)}}
+@media(max-width:640px){.skew-card{width:90vw;max-width:300px}}
+
+/* ── COMPARISON: WHITE BACKGROUND ── */
+#comparison{background:#f8fafc!important}
+#comparison .comparison-radial{display:none!important}
+#comparison .sec-title{color:#0f172a!important}
+#comparison .sec-title em{color:var(--blue)!important}
+#comparison .sec-body{color:#475569!important}
+#comparison .sec-eyebrow{color:var(--blue)!important;background:rgba(74,159,212,0.1)!important;border-color:rgba(74,159,212,0.25)!important}
 
 /* ── MOBILE: WHY-STAT numbers above text ── */
 @media(max-width:768px){
@@ -960,10 +1077,15 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 <!-- ════ ABOUT ════ -->
 <section class="about-section" id="about">
-  <canvas id="shaderCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.6"></canvas>
+  <!-- Beam grid background -->
+  <div class="beam-bg" id="beamBg">
+    <div class="beam-floor-plane beam-floor-top">
+      <div class="beam-grid-inner"></div>
+    </div>
+  </div>
   <div class="about-inner" style="position:relative;z-index:2">
-    <h2 class="about-heading">We Are Silhouette</h2>
     <div class="about-card">
+      <h2 class="about-heading" style="margin-bottom:20px">We Are Silhouette</h2>
       <p>Silhouette A.I. Automation is a done-for-you content production company built for business owners who understand that visibility drives growth — but can't afford to sacrifice the time it demands.</p>
       <p>We engineer photorealistic AI avatars modeled on your face, your voice, and your brand identity, then deploy them across every major short-form video platform every single day.</p>
       <p>The result: a consistently growing digital presence that compounds over time, puts your name in front of new audiences around the clock, and positions you as the authority in your market — all without pulling you away from the work that actually runs your business.</p>
@@ -973,58 +1095,61 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 <!-- ════ WHAT WE DO / SERVICES ════ -->
 <section class="services" id="services">
+  <canvas id="glitterCanvas"></canvas>
   <div class="wrap">
-    <div class="services-header" style="grid-template-columns:1fr;text-align:center;max-width:600px;margin:0 auto 60px">
-      <div>
-        <h2 class="sec-title" style="text-align:center">What Silhouette<br><em>does for you.</em></h2>
-      </div>
-      <div>
-        <p class="sec-body">One service. One team. Zero guesswork. Here's exactly what you get from day one no hidden fees, no add-ons you have to figure out yourself.</p>
-      </div>
+    <div style="text-align:center;max-width:600px;margin:0 auto 52px">
+      <h2 class="sec-title" style="text-align:center;margin-bottom:12px">What Silhouette<br><em>does for you.</em></h2>
+      <p class="sec-body" style="margin:0 auto">One service. One team. Zero guesswork. Here's exactly what you get from day one — no hidden fees, no add-ons you have to figure out yourself.</p>
     </div>
 
-    <div class="serv-grid">
-      <div class="serv-item">
-                <div class="serv-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="5" stroke="#4A9FD4" stroke-width="1.5"/><path d="M12 14v2m-4 4h8" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="9" r="8.5" stroke="#4A9FD4" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.4"/></svg>
+    <div class="glow-serv-grid" id="glowGrid">
+      <div class="glow-card">
+        <div class="glow-spot"></div><div class="glow-border"></div>
+        <div class="glow-card-body">
+          <div class="serv-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="5" stroke="#4A9FD4" stroke-width="1.5"/><path d="M12 14v2m-4 4h8" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="9" r="8.5" stroke="#4A9FD4" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.4"/></svg></div>
+          <h3>Photorealistic AI Clone</h3>
+          <p>A custom-built AI avatar trained on your likeness and voice. One 2-minute recording session is all it takes. From that point, your clone posts for you indefinitely.</p>
         </div>
-        <h3>Photorealistic AI Clone</h3>
-        <p>A custom-built AI avatar trained on your likeness and voice. One 2-minute recording session is all it takes. From that point, your clone posts for you indefinitely.</p>
       </div>
-      <div class="serv-item">
-                <div class="serv-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><path d="M18 2l4 4-9.5 9.5L9 17l.5-3.5L18 2z" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="glow-card">
+        <div class="glow-spot"></div><div class="glow-border"></div>
+        <div class="glow-card-body">
+          <div class="serv-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><path d="M18 2l4 4-9.5 9.5L9 17l.5-3.5L18 2z" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Daily Script Writing</h3>
+          <p>Our team writes platform-native scripts every day matched to your voice, your audience, and trending content formats for maximum reach and engagement.</p>
         </div>
-        <h3>Daily Script Writing</h3>
-        <p>Our team writes platform-native scripts every day matched to your voice, your audience, and trending content formats for maximum reach and engagement.</p>
       </div>
-      <div class="serv-item">
-                <div class="serv-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><polygon points="23 7 16 12 23 17 23 7" stroke="#4A9FD4" stroke-width="1.5" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#4A9FD4" stroke-width="1.5"/></svg>
+      <div class="glow-card">
+        <div class="glow-spot"></div><div class="glow-border"></div>
+        <div class="glow-card-body">
+          <div class="serv-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><polygon points="23 7 16 12 23 17 23 7" stroke="#4A9FD4" stroke-width="1.5" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#4A9FD4" stroke-width="1.5"/></svg></div>
+          <h3>Full Video Production</h3>
+          <p>Rendered, edited, and optimized videos complete with captions, B-roll, graphics, and branding. Formatted natively for every platform from day one.</p>
         </div>
-        <h3>Full Video Production</h3>
-        <p>Rendered, edited, and optimized videos complete with captions, B-roll, graphics, and branding. Formatted natively for every platform from day one.</p>
       </div>
-      <div class="serv-item">
-                <div class="serv-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><polyline points="16 6 12 2 8 6" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="2" x2="12" y2="15" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div class="glow-card">
+        <div class="glow-spot"></div><div class="glow-border"></div>
+        <div class="glow-card-body">
+          <div class="serv-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><polyline points="16 6 12 2 8 6" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="2" x2="12" y2="15" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <h3>Automated Multi-Platform Posting</h3>
+          <p>Every video is automatically published to all your connected platforms — timed, formatted, and captioned for each platform's algorithm every single day.</p>
         </div>
-        <h3>Automated Multi-Platform Posting</h3>
-        <p>Every video is automatically published to all your connected platforms timed, formatted, and captioned for each platform's algorithm every single day.</p>
       </div>
-      <div class="serv-item">
-                <div class="serv-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="4" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><line x1="6" y1="20" x2="6" y2="14" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div class="glow-card">
+        <div class="glow-spot"></div><div class="glow-border"></div>
+        <div class="glow-card-body">
+          <div class="serv-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="4" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><line x1="6" y1="20" x2="6" y2="14" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <h3>Performance Reporting</h3>
+          <p>Monthly reports on views, reach, follower growth, and engagement across every platform so you can see your brand building in real time.</p>
         </div>
-        <h3>Performance Reporting</h3>
-        <p>Monthly reports on views, reach, follower growth, and engagement across every platform so you can see your brand building in real time.</p>
       </div>
-      <div class="serv-item">
-                <div class="serv-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#4A9FD4" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <div class="glow-card">
+        <div class="glow-spot"></div><div class="glow-border"></div>
+        <div class="glow-card-body">
+          <div class="serv-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#4A9FD4" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <h3>Dedicated Account Manager</h3>
+          <p>A real human on your account reviewing content quality, adjusting strategy, and ensuring everything stays on-brand. Plus a weekly Slack channel for your approval workflow.</p>
         </div>
-        <h3>Dedicated Account Manager</h3>
-        <p>A real human on your account reviewing content quality, adjusting strategy, and ensuring everything stays on-brand. Plus a weekly Slack channel for your approval workflow.</p>
       </div>
     </div>
   </div>
@@ -1093,38 +1218,58 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
       <p class="sec-body">From that point forward, you never film again. Our team handles all the research, scripting, production, formatting, and posting every single day.</p>
     </div>
 
-    <div class="steps-grid fade-up">
-      <div class="step">
-        <span class="step-num">01</span>
-        <div class="step-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#4A9FD4" stroke-width="1.5"/><path d="M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="8" r="7" stroke="#4A9FD4" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.5"/></svg>
+    <div class="skew-cards fade-up">
+      <!-- Step 1: indigo→blue -->
+      <div class="skew-card">
+        <span class="skew-card-panel" style="background:linear-gradient(315deg,#6d28d9,#3b82f6)"></span>
+        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#6d28d9,#3b82f6)"></span>
+        <span class="skew-card-blob-tl"></span>
+        <span class="skew-card-blob-br"></span>
+        <div class="skew-card-content">
+          <div class="skew-card-step">Step 01</div>
+          <div class="skew-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#fff" stroke-width="1.5"/><path d="M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <h3>Avatar &amp; Voice Clone</h3>
+          <p>You record a 2-minute video on your phone. We build a photorealistic AI clone of your face and a perfect replica of your voice. Done once, runs forever.</p>
         </div>
-        <h3>Avatar &amp; Voice Clone</h3>
-        <p>You record a 2-minute video on your phone. We use that to build a photorealistic AI clone of your face and a perfect replica of your voice. This only needs to be done once.</p>
       </div>
-      <div class="step">
-        <span class="step-num">02</span>
-        <div class="step-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><path d="M18 2l4 4-9.5 9.5L9 17l.5-3.5L18 2z" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <!-- Step 2: cyan→teal -->
+      <div class="skew-card">
+        <span class="skew-card-panel" style="background:linear-gradient(315deg,#0891b2,#0d9488)"></span>
+        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#0891b2,#0d9488)"></span>
+        <span class="skew-card-blob-tl"></span>
+        <span class="skew-card-blob-br"></span>
+        <div class="skew-card-content">
+          <div class="skew-card-step">Step 02</div>
+          <div class="skew-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M18 2l4 4-9.5 9.5L9 17l.5-3.5L18 2z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Script Writing &amp; Research</h3>
+          <p>Our team researches trending topics in your industry every day, writing compelling platform-native scripts tailored to your niche, your voice, and your audience.</p>
         </div>
-        <h3>Script Writing &amp; Research</h3>
-        <p>Our team researches trending topics in your industry and the Phoenix market every day, then writes compelling scripts tailored to your niche, your voice, and your audience.</p>
       </div>
-      <div class="step">
-        <span class="step-num">03</span>
-        <div class="step-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><polygon points="23 7 16 12 23 17 23 7" stroke="#4A9FD4" stroke-width="1.5" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#4A9FD4" stroke-width="1.5"/></svg>
+      <!-- Step 3: emerald→blue -->
+      <div class="skew-card">
+        <span class="skew-card-panel" style="background:linear-gradient(315deg,#059669,#2563eb)"></span>
+        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#059669,#2563eb)"></span>
+        <span class="skew-card-blob-tl"></span>
+        <span class="skew-card-blob-br"></span>
+        <div class="skew-card-content">
+          <div class="skew-card-step">Step 03</div>
+          <div class="skew-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><polygon points="23 7 16 12 23 17 23 7" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" stroke="#fff" stroke-width="1.5"/></svg></div>
+          <h3>Video Production</h3>
+          <p>Your AI avatar is placed over B-roll. We add captions, transitions, and brand elements, then format each video natively for TikTok, Reels, Shorts, Facebook, and LinkedIn.</p>
         </div>
-        <h3>Video Production</h3>
-        <p>Your AI avatar is placed over relevant B-roll footage. We add captions, transitions, and brand elements, then format each video for TikTok, Reels, Shorts, Facebook, and LinkedIn.</p>
       </div>
-      <div class="step">
-        <span class="step-num">04</span>
-        <div class="step-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <!-- Step 4: amber→rose -->
+      <div class="skew-card">
+        <span class="skew-card-panel" style="background:linear-gradient(315deg,#d97706,#e11d48)"></span>
+        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#d97706,#e11d48)"></span>
+        <span class="skew-card-blob-tl"></span>
+        <span class="skew-card-blob-br"></span>
+        <div class="skew-card-content">
+          <div class="skew-card-step">Step 04</div>
+          <div class="skew-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>You Approve &amp; We Post</h3>
+          <p>Content drops into your private Slack channel weekly. Review in 10 minutes, approve, and we post automatically every single day — no extra effort from you.</p>
         </div>
-        <h3>You Approve &amp; We Post</h3>
-        <p>Each week's content batch drops into your private Slack channel. You have 24 hours to approve. Once cleared, we schedule and post automatically every day no extra effort from you.</p>
       </div>
     </div>
 
@@ -1219,8 +1364,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 
 <!-- ════ DIY COMPARISON ════ -->
-<section style="padding:100px 0;background:var(--black);position:relative;overflow:hidden" id="comparison">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(74,159,212,0.06),transparent 70%);pointer-events:none"></div>
+<section style="padding:100px 0;position:relative;overflow:hidden" id="comparison">
+  <div class="comparison-radial" style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(74,159,212,0.06),transparent 70%);pointer-events:none"></div>
   <div class="wrap" style="position:relative;z-index:1">
     <div style="text-align:center;margin-bottom:64px">
       <div class="sec-eyebrow">The Real Cost of Doing It Yourself</div>
@@ -1802,62 +1947,85 @@ window.addEventListener('scroll', () => {
   const canvas = document.getElementById('starfieldCanvas');
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
+  const QUANTITY = 512, SPEED = 1;
   let w, h, stars = [];
-  const N = 280;
+  let cx, cy, z, ratio;
+  let mouse = {x:0,y:0}, cursor = {x:0,y:0};
 
   function resize(){
     const par = canvas.parentElement;
     w = canvas.width = par.offsetWidth;
     h = canvas.height = par.offsetHeight;
+    cx = w/2; cy = h/2;
+    z = (w+h)/2;
+    ratio = QUANTITY/2;
+    if(cursor.x===0||cursor.y===0){cursor.x=cx;cursor.y=cy}
+    if(mouse.x===0&&mouse.y===0){mouse.x=cursor.x-cx;mouse.y=cursor.y-cy}
   }
 
-  function initStars(){
+  function bigBang(){
     stars = [];
-    for(let i=0;i<N;i++){
-      stars.push({
-        x: Math.random()*w*2 - w,
-        y: Math.random()*h*2 - h,
-        z: Math.random() * (w+h)/2,
-        px:0, py:0
-      });
+    for(let i=0;i<QUANTITY;i++){
+      stars.push([
+        Math.random()*w*2 - cx*2,
+        Math.random()*h*2 - cy*2,
+        Math.round(Math.random()*z),
+        0,0,0,0,true
+      ]);
     }
   }
 
-  const cx = () => w/2, cy = () => h/2;
-  const ratio = N/2;
-
-  function draw(){
-    ctx.fillStyle = 'rgba(8,8,8,0.25)';
-    ctx.fillRect(0,0,w,h);
-    ctx.strokeStyle = 'rgba(74,159,212,0.7)';
-
-    stars.forEach(s => {
-      const ox = s.px, oy = s.py;
-      s.px = cx() + (s.x / s.z) * ratio;
-      s.py = cy() + (s.y / s.z) * ratio;
-      s.z -= 0.6;
-      if(s.z <= 0 || s.px < 0 || s.px > w || s.py < 0 || s.py > h){
-        s.x = Math.random()*w*2-w;
-        s.y = Math.random()*h*2-h;
-        s.z = (w+h)/2;
-        s.px = cx() + (s.x/s.z)*ratio;
-        s.py = cy() + (s.y/s.z)*ratio;
-        return;
-      }
-      const depth = 1 - s.z/((w+h)/2);
-      ctx.lineWidth = depth * 1.8;
-      ctx.beginPath();
-      ctx.moveTo(ox||s.px, oy||s.py);
-      ctx.lineTo(s.px, s.py);
-      ctx.stroke();
+  function update(){
+    mouse.x = (cursor.x - cx) / 1;
+    mouse.y = (cursor.y - cy) / 1;
+    stars = stars.map(s=>{
+      const n=[...s];
+      n[7]=true; n[5]=n[3]; n[6]=n[4];
+      n[0] += mouse.x >> 4;
+      if(n[0]>cx<<1){n[0]-=w<<1;n[7]=false}
+      if(n[0]<-(cx<<1)){n[0]+=w<<1;n[7]=false}
+      n[1] += mouse.y >> 4;
+      if(n[1]>cy<<1){n[1]-=h<<1;n[7]=false}
+      if(n[1]<-(cy<<1)){n[1]+=h<<1;n[7]=false}
+      n[2] -= SPEED;
+      if(n[2]>z){n[2]-=z;n[7]=false}
+      if(n[2]<0){n[2]+=z;n[7]=false}
+      n[3] = cx + (n[0]/n[2])*ratio;
+      n[4] = cy + (n[1]/n[2])*ratio;
+      return n;
     });
-    requestAnimationFrame(draw);
   }
 
+  function draw(){
+    ctx.fillStyle = 'rgba(8,8,12,0.3)';
+    ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+    const colorRatio = 1/z;
+    stars.forEach(s=>{
+      if(s[5]>0&&s[5]<w&&s[6]>0&&s[6]<h&&s[7]){
+        ctx.lineWidth = (1 - colorRatio*s[2]) * 2;
+        ctx.beginPath();
+        ctx.moveTo(s[5],s[6]);
+        ctx.lineTo(s[3],s[4]);
+        ctx.stroke();
+        ctx.closePath();
+      }
+    });
+    requestAnimationFrame(animLoop);
+  }
+
+  function animLoop(){ update(); draw(); }
+
+  const par = canvas.parentElement;
+  par && par.addEventListener('mousemove', e=>{
+    cursor.x = e.clientX;
+    cursor.y = e.clientY;
+  });
+
   resize();
-  initStars();
-  draw();
-  window.addEventListener('resize', () => { resize(); initStars(); });
+  bigBang();
+  animLoop();
+  window.addEventListener('resize', ()=>{ resize(); bigBang(); });
 })();
 
 // ══════════════════════════════════════════
@@ -2082,61 +2250,130 @@ window.addEventListener('scroll', () => {
   });
 })();
 
-// ── THREE.JS SHADER: We Are Silhouette background ──
+// ══════════════════════════════════════════
+// BEAM GRID: We Are Silhouette background
+// ══════════════════════════════════════════
 (function(){
-  var s=document.createElement('script');
-  s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js';
-  s.onload=function(){
-    var canvas=document.getElementById('shaderCanvas');
-    if(!canvas||!window.THREE)return;
-    var T=window.THREE;
-    var camera=new T.Camera();camera.position.z=1;
-    var scene=new T.Scene();
-    var uniforms={
-      time:{type:'f',value:1.0},
-      resolution:{type:'v2',value:new T.Vector2()}
-    };
-    var mat=new T.ShaderMaterial({
-      uniforms:uniforms,
-      vertexShader:'void main(){gl_Position=vec4(position,1.0);}',
-      fragmentShader:[
-        '#define TWO_PI 6.2831853072',
-        'precision highp float;',
-        'uniform vec2 resolution;',
-        'uniform float time;',
-        'float random(in float x){return fract(sin(x)*1e4);}',
-        'float random(vec2 st){return fract(sin(dot(st.xy,vec2(12.9898,78.233)))*43758.5453123);}',
-        'void main(void){',
-        '  vec2 uv=(gl_FragCoord.xy*2.0-resolution.xy)/min(resolution.x,resolution.y);',
-        '  vec2 fM=vec2(4.0,2.0);vec2 vS=vec2(256.0,256.0);',
-        '  uv.x=floor(uv.x*vS.x/fM.x)/(vS.x/fM.x);',
-        '  uv.y=floor(uv.y*vS.y/fM.y)/(vS.y/fM.y);',
-        '  float t=time*0.06+random(uv.x)*0.4;',
-        '  float lw=0.0008;',
-        '  vec3 color=vec3(0.0);',
-        '  for(int j=0;j<3;j++){for(int i=0;i<5;i++){',
-        '    color[j]+=lw*float(i*i)/abs(fract(t-0.01*float(j)+float(i)*0.01)*1.0-length(uv));',
-        '  }}',
-        '  gl_FragColor=vec4(color[2],color[1],color[0],1.0);',
-        '}'
-      ].join('\n')
-    });
-    scene.add(new T.Mesh(new T.PlaneBufferGeometry(2,2),mat));
-    var renderer=new T.WebGLRenderer({canvas:canvas,alpha:false});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-    function resize(){
-      var sec=canvas.parentElement;
-      var w=sec.offsetWidth,h=sec.offsetHeight;
-      renderer.setSize(w,h);
-      uniforms.resolution.value.x=renderer.domElement.width;
-      uniforms.resolution.value.y=renderer.domElement.height;
+  const bg = document.getElementById('beamBg');
+  if(!bg) return;
+
+  const BEAMS_PER_SIDE = 4;
+  const BEAM_SIZE_PCT = 9; // matches grid cell size
+  const hues = [210,270,180,310,145,40];
+  const cells = Math.floor(100/BEAM_SIZE_PCT);
+  const step  = cells / BEAMS_PER_SIDE;
+
+  function makeBeam(xPct, delay, dur, hue){
+    const el = document.createElement('div');
+    el.className = 'beam-el';
+    const ar = 2 + Math.floor(Math.random()*6);
+    el.style.cssText = [
+      `left:${xPct}%`,
+      `width:${BEAM_SIZE_PCT}%`,
+      `aspect-ratio:1/${ar}`,
+      `background:linear-gradient(hsl(${hue} 75% 62%),transparent)`,
+      `--bd:${dur.toFixed(1)}s`,
+      `--bdelay:${delay.toFixed(2)}s`
+    ].join(';');
+    return el;
+  }
+
+  const floor = bg.querySelector('.beam-floor-plane');
+  if(!floor) return;
+
+  for(let i=0;i<BEAMS_PER_SIDE;i++){
+    const xCell = Math.floor(i * step);
+    const xPct  = xCell * BEAM_SIZE_PCT;
+    const delay  = Math.random() * 3;
+    const dur    = 2.5 + Math.random() * 2.5;
+    const hue    = hues[i % hues.length];
+    floor.appendChild(makeBeam(xPct, delay, dur, hue));
+  }
+  // second pass: offset beams for density
+  for(let i=0;i<BEAMS_PER_SIDE;i++){
+    const xCell = Math.floor(i * step) + Math.floor(step/2);
+    const xPct  = Math.min(xCell * BEAM_SIZE_PCT, 95);
+    const delay  = 1 + Math.random() * 3;
+    const dur    = 3 + Math.random() * 2;
+    const hue    = hues[(i+2) % hues.length];
+    floor.appendChild(makeBeam(xPct, delay, dur, hue));
+  }
+})();
+
+// ══════════════════════════════════════════
+// GLITTER CANVAS (services section)
+// ══════════════════════════════════════════
+(function(){
+  const canvas = document.getElementById('glitterCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  const PARTICLES = 180;
+  let sparks = [];
+
+  function resize(){
+    const sec = canvas.parentElement;
+    w = canvas.width = sec.offsetWidth;
+    h = canvas.height = sec.offsetHeight;
+  }
+
+  function rand(min,max){ return min + Math.random()*(max-min); }
+
+  function initSparks(){
+    sparks = [];
+    for(let i=0;i<PARTICLES;i++){
+      sparks.push({
+        x: rand(0,w), y: rand(0,h),
+        size: rand(0.5,2.5),
+        opacity: rand(0,1),
+        speed: rand(0.004,0.025),
+        phase: rand(0, Math.PI*2),
+        color: `hsl(${rand(190,230)},${rand(60,100)}%,${rand(75,100)}%)`
+      });
     }
-    resize();
-    window.addEventListener('resize',resize);
-    function animate(){requestAnimationFrame(animate);uniforms.time.value+=0.05;renderer.render(scene,camera);}
-    animate();
-  };
-  document.head.appendChild(s);
+  }
+
+  function drawFrame(){
+    ctx.clearRect(0,0,w,h);
+    const t = performance.now() / 1000;
+    sparks.forEach(s=>{
+      const a = Math.pow(Math.max(0, Math.sin(t * s.speed * Math.PI * 2 + s.phase)), 12);
+      if(a < 0.01) return;
+      ctx.save();
+      ctx.globalAlpha = a * 0.9;
+      ctx.shadowBlur = s.size * 8;
+      ctx.shadowColor = s.color;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+    requestAnimationFrame(drawFrame);
+  }
+
+  resize();
+  initSparks();
+  drawFrame();
+  window.addEventListener('resize', ()=>{ resize(); initSparks(); });
+})();
+
+// ══════════════════════════════════════════
+// GLOW CARDS pointer tracking
+// ══════════════════════════════════════════
+(function(){
+  const cards = document.querySelectorAll('#glowGrid .glow-card');
+  cards.forEach(card=>{
+    card.addEventListener('mousemove', e=>{
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.querySelectorAll('.glow-spot,.glow-border').forEach(el=>{
+        el.style.setProperty('--cx', x+'px');
+        el.style.setProperty('--cy', y+'px');
+      });
+    });
+  });
 })();
 
 </script>
