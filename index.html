@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Silhouette A.I. Automation &mdash; Your Digital Clone. Fully Done For You.</title>
+<title>Silhouette A.I. Automation : Your Digital Clone. Fully Done For You.</title>
 <meta name="description" content="Silhouette A.I. Automation builds a photorealistic AI avatar of your face and voice, then publishes original short-form videos across every major social network automatically. Phoenix, AZ.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -626,12 +626,14 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 /* ”€”€ BUTTON GLOW ”€”€ */
 .btn-primary,.sch-cta{
-  box-shadow:0 0 0 0 rgba(74,159,212,0);
+  box-shadow:0 0 14px rgba(74,159,212,0.3);
   transition:opacity 0.2s,transform 0.2s,box-shadow 0.3s!important;
 }
 .btn-primary:hover,.sch-cta:hover{
-  box-shadow:0 4px 24px rgba(74,159,212,0.35)!important;
+  box-shadow:0 0 24px rgba(74,159,212,0.55),0 4px 16px rgba(74,159,212,0.3)!important;
 }
+.nav-cta{box-shadow:0 0 12px rgba(74,159,212,0.25)!important}
+.nav-cta:hover{box-shadow:0 0 20px rgba(74,159,212,0.45)!important}
 
 /* ”€”€ SECTION EYEBROW REFINEMENT ”€”€ */
 .sec-eyebrow{
@@ -865,6 +867,12 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 /* -- GLSL HILLS (about section) -- */
 #glslHillsCanvas{display:block}
+/* Gradient bars - About section */
+@keyframes aboutBarPulse {
+  from { opacity: 1; }
+  to   { opacity: 0.6; }
+}
+#aboutBarsCanvas { image-rendering: pixelated; }
 
 
 /* ”€”€ SERVICES: GLITTER BG ”€”€ */
@@ -1006,7 +1014,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
   <a href="#pricing" class="mob-link">Pricing</a>
   <a href="#comparison" class="mob-link">vs. DIY</a>
   <a href="#faq" class="mob-link">FAQ</a>
-  <a href="https://calendar.app.google/8L2qcS3xxKkN1wN98" target="_blank" class="mob-cta">Schedule a Free Call †’</a>
+  <a href="https://calendar.app.google/8L2qcS3xxKkN1wN98" target="_blank" class="mob-cta">Schedule a Free Call</a>
 </div>
 
 <!-- ==== HERO ==== -->
@@ -1014,8 +1022,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
   <div id="floatingIconsLayer"></div>
   <div class="hero" style="position:relative;z-index:2">
     <div>
-      <h1 class="shimmer-text">Your <em>Digital Clone.</em><br>Posting Every Day.<br>Fully Done For You.</h1>
-      <p class="hero-sub">You record once for 2 minutes. We handle everything else, forever.</p>
+      <h1 class="shimmer-text">Your Face. Your Voice.<br><em>Posting for You</em> Every Day.</h1>
+      <p class="hero-sub">Record two minutes of footage. We build a photorealistic AI avatar of your likeness and voice, then publish original short-form content across every major social network automatically.</p>
       <div class="hero-actions">
         <a href="https://calendar.app.google/8L2qcS3xxKkN1wN98" target="_blank" class="btn-primary">
           Schedule a Free Call
@@ -1064,13 +1072,14 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 
 <!-- ==== ABOUT ==== -->
-<section class="about-section" id="about">
-  <div class="about-inner">
+<section class="about-section" id="about" style="position:relative;overflow:hidden">
+  <canvas id="aboutBarsCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.55"></canvas>
+  <div class="about-inner" style="position:relative;z-index:1">
     <div class="about-card">
-      <h2 class="about-heading" style="margin-bottom:20px">We Are Silhouette</h2>
-      <p>Silhouette A.I. Automation is a done-for-you content production company built for business operators who know that online visibility drives revenue — but cannot sacrifice the hours it demands.</p>
+      <h2 class="about-heading" style="margin-bottom:20px">We Are <span style="color:var(--blue)">Silhouette</span></h2>
+      <p>Silhouette A.I. Automation is a done-for-you content production company built for business operators who know that online visibility drives revenue, but cannot sacrifice the hours it demands.</p>
       <p>We craft photorealistic AI avatars modeled on your face, your voice, and your brand identity, then deploy original short-form video content across every major platform on autopilot.</p>
-      <p>The result is a compounding digital presence that introduces your name to new audiences continuously, positions you as the authority in your market, and builds equity over time — without ever pulling you away from the work that keeps your business running.</p>
+      <p>The result is a compounding digital presence that introduces your name to new audiences continuously, positions you as the authority in your market, and builds equity over time, without ever pulling you away from the work that keeps your business running.</p>
     </div>
   </div>
 </section>
@@ -1082,7 +1091,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
   <div class="wrap">
     <div style="text-align:center;max-width:600px;margin:0 auto 52px">
       <h2 class="sec-title" style="text-align:center;margin-bottom:12px">What Silhouette<br><em>does for you.</em></h2>
-      <p class="sec-body" style="margin:0 auto">One service. One team. Zero guesswork. Here's exactly what you get from day one — no hidden fees, no add-ons you have to figure out yourself.</p>
+      <p class="sec-body" style="margin:0 auto">One service. One team. Zero guesswork. Here's exactly what you get from day one, no hidden fees, no add-ons you have to figure out yourself.</p>
     </div>
 
     <div class="glow-serv-grid" id="glowGrid">
@@ -1115,7 +1124,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
         <div class="glow-card-body">
           <div class="serv-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/><polyline points="16 6 12 2 8 6" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="2" x2="12" y2="15" stroke="#4A9FD4" stroke-width="1.5" stroke-linecap="round"/></svg></div>
           <h3>Automated Multi-Platform Posting</h3>
-          <p>Every video is automatically published to all your connected platforms — timed, formatted, and captioned for each platform's algorithm every single day.</p>
+          <p>Every video is automatically published to all your connected platforms, timed, formatted, and captioned for each platform's algorithm every single day.</p>
         </div>
       </div>
       <div class="glow-card">
@@ -1199,7 +1208,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
           <div class="skew-card-step">Step 04</div>
           <div class="skew-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3>You Approve &amp; We Post</h3>
-          <p>Content drops into your private Slack channel weekly. Review in 10 minutes, approve, and we post automatically every single day — no extra effort from you.</p>
+          <p>Content drops into your private Slack channel weekly. Review in 10 minutes, approve, and we post automatically every single day, no extra effort from you.</p>
         </div>
       </div>
     </div>
@@ -1252,7 +1261,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
       <div style="display:grid;grid-template-columns:2.5fr 1fr 1fr;border-bottom:1px solid var(--border);transition:background 0.2s" onmouseenter="this.style.background='rgba(255,255,255,0.02)'" onmouseleave="this.style.background='transparent'">
         <div style="padding:18px 28px">
           <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px">Research &amp; write scripts (monthly)</div>
-          <div style="font-size:12px;color:var(--muted)">Trending topics, platform-native formats, hooks, CTAs — 30 scripts/mo</div>
+          <div style="font-size:12px;color:var(--muted)">Trending topics, platform-native formats, hooks, CTAs, 30 scripts/mo</div>
         </div>
         <div style="padding:18px 20px;text-align:center;display:flex;align-items:center;justify-content:center"><span style="font-size:13px;color:rgba(255,120,120,0.9);font-weight:600">15–30 hrs/mo</span></div>
         <div style="padding:18px 20px;text-align:center;display:flex;align-items:center;justify-content:center"><span style="font-size:13px;color:#4ade80;font-weight:600">0 hrs/mo</span></div>
@@ -1405,7 +1414,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
             </div>
             <div>
               <h4>Contractors</h4>
-              <p>Document before-and-afters, build trust with project updates, and become the go-to contractor in your service area — all while you stay focused on doing the actual work.</p>
+              <p>Document before-and-afters, build trust with project updates, and become the go-to contractor in your service area, all while you stay focused on doing the actual work.</p>
             </div>
           </div>
           <div class="ind-card">
@@ -1450,12 +1459,13 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 <!-- ==== WHY SOCIAL MEDIA ==== -->
 <section class="why" id="why">
   <div class="wrap">
+    <div style="text-align:center;max-width:700px;margin:0 auto 52px">
+      <div class="sec-eyebrow">The Data Is Clear</div>
+      <h2 class="sec-title">Your clients are already watching. <em>Is it you they're watching?</em></h2>
+      <p class="sec-body" style="margin:0 auto">Purchasing decisions begin long before a prospect picks up the phone. Short-form video is where those decisions are being shaped, and right now, your competitors are showing up in that window every single day.</p>
+    </div>
     <div class="why-inner">
       <div>
-        <div class="sec-eyebrow" style="text-align:center">The Data Is Clear</div>
-        <h2 class="sec-title">Your clients are already watching.<br><em>Is it you they're watching?</em></h2>
-        <p class="sec-body" style="margin-bottom:0">Purchasing decisions begin long before a prospect picks up the phone. Short-form video is where those decisions are being shaped — and right now, your competitors are showing up in that window every single day.</p>
-
         <div class="why-stats">
           <div class="why-stat">
             <div class="why-num">78%</div>
@@ -1468,14 +1478,14 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
             <div class="why-num">59%</div>
             <div class="why-stat-text">
               <h4>of consumers discover new businesses via social media</h4>
-              <p>Short-form video outpaces traditional search and broadcast in brand discovery. This is where your next client will find you — not through billboards, radio, or paid search.</p>
+              <p>Short-form video outpaces traditional search and broadcast in brand discovery. This is where your next client will find you, not through billboards, radio, or paid search.</p>
             </div>
           </div>
           <div class="why-stat">
             <div class="why-num">82%</div>
             <div class="why-stat-text">
               <h4>of positive social experiences lead directly to referrals</h4>
-              <p>When people watch your videos consistently, they feel like they know you. When a friend needs your service, your name is the first one they mention — because your face has been in their feed for months.</p>
+              <p>When people watch your videos consistently, they feel like they know you. When a friend needs your service, your name is the first one they mention, because your face has been in their feed for months.</p>
             </div>
           </div>
         </div>
@@ -1484,15 +1494,15 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
       <div class="why-right">
         <div class="why-block">
           <h3>Your competition is already there. <em>So why aren't you?</em></h3>
-          <p>About 96% of American small businesses use social media in 2026. The question is no longer whether you should be on social media — it's whether you're showing up consistently enough to win. Most competitors are posting, but not at the volume, quality, or consistency that actually moves the algorithm. That gap is your opportunity.</p>
+          <p>About 96% of American small businesses use social media in 2026. The question is no longer whether you should be on social media, it's whether you're showing up consistently enough to win. Most competitors are posting, but not at the volume, quality, or consistency that actually moves the algorithm. That gap is your opportunity.</p>
         </div>
         <div class="why-block">
           <h3><em>The Algorithm Rewards Volume.</em></h3>
-          <p>Posting three times a day, every day, tells the algorithm you're a creator worth promoting. TikTok and Instagram are designed to surface high-volume, consistent accounts to new audiences. Ninety to 270 videos per month is not just a strong content strategy — it's platform domination.</p>
+          <p>Posting three times a day, every day, tells the algorithm you're a creator worth promoting. TikTok and Instagram are designed to surface high-volume, consistent accounts to new audiences. Ninety to 270 videos per month is not just a strong content strategy, it's platform domination.</p>
         </div>
         <div class="why-block">
           <h3>Audiences are built in <em>silence</em>, then noticed all at once.</h3>
-          <p>Most business owners abandon social media after 60 to 90 days because they don't see immediate results. Social media growth is not linear — it's exponential. The accounts that stay consistent through the first few months are the ones that suddenly explode in reach six to nine months later when the algorithm catches on. Silhouette A.I. keeps your content publishing through every stage of that growth curve.</p>
+          <p>Most business owners abandon social media after 60 to 90 days because they don't see immediate results. Social media growth is not linear, it's exponential. The accounts that stay consistent through the first few months are the ones that suddenly explode in reach six to nine months later when the algorithm catches on. Silhouette A.I. keeps your content publishing through every stage of that growth curve.</p>
         </div>
       </div>
     </div>
@@ -1525,7 +1535,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(74,159,212,0.5),transparent);border-radius:16px 16px 0 0"></div>
         <h3 style="font-family:var(--head);font-size:28px;font-weight:700;color:#fff;margin-bottom:16px">Starter</h3>
         <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:4px">
-          <span style="font-family:var(--head);font-size:42px;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-0.02em">$1,000</span>
+          <span style="font-family:var(--head);font-size:42px;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-0.02em">$1,250</span>
         </div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:20px">/ month</div>
         <p style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:28px">For businesses ready to build a consistent online presence. Designed to increase visibility, stay active, and connect with your audience affordably.</p>
@@ -1551,7 +1561,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
         <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#2E7BAF,#4A9FD4);color:#fff;padding:5px 18px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap">Most Popular</div>
         <h3 style="font-family:var(--head);font-size:28px;font-weight:700;color:#fff;margin-bottom:16px">Growth</h3>
         <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:4px">
-          <span style="font-family:var(--head);font-size:42px;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-0.02em">$2,250</span>
+          <span style="font-family:var(--head);font-size:42px;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-0.02em">$2,500</span>
         </div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:20px">/ month</div>
         <p style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.65;margin-bottom:28px">Grow faster with a high-impact content strategy designed to expand your reach across multiple platforms with more volume and variety.</p>
@@ -1575,7 +1585,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(74,159,212,0.5),transparent);border-radius:16px 16px 0 0"></div>
         <h3 style="font-family:var(--head);font-size:28px;font-weight:700;color:#fff;margin-bottom:16px">Dominator</h3>
         <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:4px">
-          <span style="font-family:var(--head);font-size:42px;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-0.02em">$3,500</span>
+          <span style="font-family:var(--head);font-size:42px;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-0.02em">$4,000</span>
         </div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:20px">/ month</div>
         <p style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:28px">Built for businesses that want to rapidly grow and dominate across multiple platforms with a high-volume content strategy.</p>
@@ -1616,8 +1626,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 <section class="schedule" id="contact">
   <div class="schedule-inner">
     <div class="sec-eyebrow" style="text-align:center;margin-bottom:16px">Let's Talk</div>
-    <h2>Your brand doesn't stop when<br><em>you're not posting.</em></h2>
-    <p>Book a free strategy call with our team. We'll walk you through the cloning process, show you real examples, and build a content plan tailored to your industry and your market in Phoenix.</p>
+    <h2>See your AI avatar<br><em>before you commit to anything.</em></h2>
+    <p>A 30-minute call. No pitch decks, no pressure, just a live demo built around your industry so you can see exactly what your avatar would look like in practice.</p>
 
     <div class="schedule-card">
       <div class="sch-row">
@@ -2088,15 +2098,15 @@ window.addEventListener('scroll', () => {
 (function(){
   const faqs = [
     {q:"What exactly is an AI avatar clone?", a:"We build a photorealistic digital version of your face and voice using advanced AI technology. From a single 2-minute video recording, we train a model that can produce new videos of you speaking indistinguishable from real footage. Your clone then delivers new content scripts every day without you ever needing to film again."},
-    {q:"How long does it take to get started?", a:"Most clients are live within 7 days. After your discovery call, we gather your training video and brand assets. Our team handles the full build — avatar training, voice cloning, brand mapping, and the first content batch so you can be posting within a week."},
+    {q:"How long does it take to get started?", a:"Most clients are live within 7 days. After your discovery call, we gather your training video and brand assets. Our team handles the full build, avatar training, voice cloning, brand mapping, and the first content batch so you can be posting within a week."},
     {q:"Do I have to approve every video before it posts?", a:"Yes, and it only takes about 10 minutes per week. Each batch of videos lands in your private Slack channel. You have 24 hours to review and approve. If you're happy, we post automatically. If you want any changes, we revise within 24 hours."},
-    {q:"Which social media platforms do you post to?", a:"We post to TikTok, Instagram Reels, YouTube Shorts, Facebook Reels, and LinkedIn. The number of platforms depends on your plan — Starter covers 3 platforms, Growth covers 4, and Dominator covers all 5."},
+    {q:"Which social media platforms do you post to?", a:"We post to TikTok, Instagram Reels, YouTube Shorts, Facebook Reels, and LinkedIn. The number of platforms depends on your plan, Starter covers 3 platforms, Growth covers 4, and Dominator covers all 5."},
     {q:"Will the videos actually look like me?", a:"Yes. The photorealism of modern AI avatars is remarkable. Our clones capture your facial expressions, skin tone, lighting nuance, and vocal cadence with high accuracy. We use only industry-leading avatar generation tools and quality-check every video before it hits your approval channel."},
-    {q:"What kind of content gets created?", a:"Our team researches trending topics in your specific industry and local market daily, then writes scripts tailored to your niche and voice. Content types include tips, commentary, educational explainers, promotional pieces, and storytelling — all formatted natively for each platform."},
+    {q:"What kind of content gets created?", a:"Our team researches trending topics in your specific industry and local market daily, then writes scripts tailored to your niche and voice. Content types include tips, commentary, educational explainers, promotional pieces, and storytelling, all formatted natively for each platform."},
     {q:"Is this compliant for industries like financial advising?", a:"We're compliance-aware and write scripts that avoid guarantee language, speculative claims, or anything that would trigger regulatory concerns. That said, you review every video before it posts so you always have final control over what goes out under your name."},
     {q:"What happens if I'm not happy with the content quality?", a:"We revise any video you're not happy with, no questions asked. Our team takes feedback and adjusts scripts, visuals, or pacing until it matches your brand. Over time, we get to know your preferences deeply and revisions become increasingly rare."},
     {q:"How is Silhouette different from me just hiring an editor?", a:"A freelance editor can cut footage but they can't create new videos of you from scratch, write platform-native scripts daily, manage posting schedules across 5 platforms, or produce 30–90 videos per month at our price point. We're an entire content production engine, not a single hire."},
-    {q:"How much does it cost and what do I get?", a:"Plans start at $1,000/month for 30 videos across 3 platforms (1 post/day each). Our Growth plan at $2,250/month delivers 60 videos across 4 platforms. The Dominator plan at $3,500/month delivers 90 base videos with hook variations across all 5 platforms — up to 180 posts per month. All plans include AI clone creation, script writing, production, and posting."},
+    {q:"How much does it cost and what do I get?", a:"Plans start at $1,000/month for 30 videos across 3 platforms (1 post/day each). Our Growth plan at $2,250/month delivers 60 videos across 4 platforms. The Dominator plan at $3,500/month delivers 90 base videos with hook variations across all 5 platforms, up to 180 posts per month. All plans include AI clone creation, script writing, production, and posting."},
   ];
 
   const grid = document.getElementById('faqGrid');
@@ -2543,6 +2553,42 @@ window.addEventListener('scroll', () => {
   });
 })();
 
+
+// GRADIENT BARS - About section animated background
+(function() {
+  var c = document.getElementById('aboutBarsCanvas');
+  if (!c) return;
+  var ctx = c.getContext('2d');
+  var N = 15;
+  var t = 0;
+  function resize() {
+    c.width = c.offsetWidth || c.parentElement.offsetWidth || 800;
+    c.height = c.offsetHeight || c.parentElement.offsetHeight || 400;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  function draw() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (var i = 0; i < N; i++) {
+      var pos = i / (N - 1);
+      var dist = Math.abs(pos - 0.5);
+      var baseScale = 0.3 + 0.7 * Math.pow(dist * 2, 1.2);
+      var wave = 0.5 + 0.5 * Math.sin(t + i * 0.42);
+      var scale = baseScale - (baseScale * 0.3) * wave;
+      var barW = c.width / N;
+      var barX = i * barW;
+      var barH = c.height * scale;
+      var grad = ctx.createLinearGradient(0, c.height, 0, c.height - barH);
+      grad.addColorStop(0, 'rgba(74,159,212,0.5)');
+      grad.addColorStop(1, 'rgba(74,159,212,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(barX, c.height - barH, barW, barH);
+    }
+    t += 0.025;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 </body>
 </html>
