@@ -858,33 +858,29 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 .about-card p{font-size:17px;color:var(--muted);line-height:1.8;text-align:center;margin:0}
 .about-heading{font-family:var(--head);font-size:clamp(28px,4vw,48px);font-weight:800;color:var(--text);line-height:1.08;letter-spacing:-0.035em;margin-bottom:20px;text-align:center}
 
-/* ── BEAM GRID (about section) ── */
-.beam-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.beam-floor-plane{
-  position:absolute;left:0;width:100%;
-  overflow:hidden;
-  transform-style:preserve-3d;
+/* ── WARP BACKGROUND (about section) ── */
+.warp-bg{
+  position:absolute;inset:0;pointer-events:none;
+  overflow:hidden;clip-path:inset(0);
+  perspective:100px;transform-style:preserve-3d;z-index:0;
 }
-.beam-floor-top{top:0;height:600%;transform-origin:50% 0%;transform:perspective(180px) rotateX(-82deg)}
-.beam-grid-inner{
-  position:absolute;inset:0;
+.warp-plane{
+  position:absolute;overflow:hidden;
   background-image:
-    linear-gradient(rgba(255,255,255,0.06) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.06) 1px,transparent 1px);
-  background-size:9% 9%;
+    linear-gradient(rgba(255,255,255,0.065) 0 1px,transparent 1px 100%),
+    linear-gradient(90deg,rgba(255,255,255,0.065) 0 1px,transparent 1px 100%);
+  background-size:5% 5%;
 }
-.beam-el{
-  position:absolute;top:0;
-  transform:translateX(-50%) translateY(800%);
-  border-radius:2px 2px 0 0;
-  animation:beamUp var(--bd,3s) var(--bdelay,0s) linear infinite;
-  opacity:0;
-}
-@keyframes beamUp{
-  0%{transform:translateX(-50%) translateY(800%);opacity:0}
-  5%{opacity:0.9}
-  85%{opacity:0.7}
-  100%{transform:translateX(-50%) translateY(-200%);opacity:0}
+.warp-top{top:0;left:0;width:100%;height:500%;transform-origin:50% 0%;transform:rotateX(-90deg)}
+.warp-bottom{bottom:0;left:0;width:100%;height:500%;transform-origin:50% 100%;transform:rotateX(90deg)}
+.warp-left{top:0;left:0;height:100%;width:500%;transform-origin:0% 50%;transform:rotateY(90deg)}
+.warp-right{top:0;right:0;height:100%;width:500%;transform-origin:100% 50%;transform:rotateY(-90deg)}
+.warp-beam{position:absolute;top:0;border-radius:2px 2px 0 0;opacity:0;animation:warpBeamUp var(--wbd,3s) var(--wbdelay,0s) linear infinite}
+@keyframes warpBeamUp{
+  0%{opacity:0;transform:translateX(-50%) translateY(500%)}
+  5%{opacity:0.85}
+  85%{opacity:0.65}
+  100%{opacity:0;transform:translateX(-50%) translateY(-100%)}
 }
 
 /* ── SERVICES: GLITTER BG ── */
@@ -930,9 +926,14 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 .glow-card h3{font-family:var(--head);font-size:16px;font-weight:700;margin-bottom:8px;line-height:1.3;text-align:center;color:var(--text)}
 .glow-card p{font-size:13px;color:var(--muted);line-height:1.65;text-align:center}
 
+/* ── PROCESS SECTION: GLITTER BG ── */
+.process{position:relative!important;overflow:hidden!important}
+#processGlitter{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen}
+.process .wrap{position:relative;z-index:2}
+
 /* ── SKEW CARDS (process section) ── */
-.skew-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:36px 28px;margin-bottom:0}
-.skew-card{position:relative;width:280px;min-height:360px;flex-shrink:0;margin:20px 0}
+.skew-cards{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:680px;margin:0 auto;margin-bottom:0}
+.skew-card{position:relative;width:100%;min-height:360px;margin:0}
 .skew-card-panel,.skew-card-blur{
   position:absolute;top:0;left:50px;width:50%;height:100%;border-radius:10px;
   transform:skewX(15deg);
@@ -964,15 +965,18 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 .skew-card-content h3{font-family:var(--head);font-size:18px;font-weight:700;margin-bottom:10px;line-height:1.25;text-align:left}
 .skew-card-content p{font-size:13px;line-height:1.7;color:rgba(255,255,255,0.75);text-align:left;margin:0}
 @keyframes blobFloat{0%,100%{transform:translateY(10px)}50%{transform:translateY(-10px)}}
-@media(max-width:640px){.skew-card{width:90vw;max-width:300px}}
+@media(max-width:700px){.skew-cards{grid-template-columns:1fr;max-width:340px}}
+@media(max-width:640px){.skew-card{width:100%;max-width:340px}}
 
-/* ── COMPARISON: WHITE BACKGROUND ── */
-#comparison{background:#f8fafc!important}
+/* ── COMPARISON: GLITTER BACKGROUND ── */
+#comparison{background:var(--black)!important;position:relative!important;overflow:hidden!important}
 #comparison .comparison-radial{display:none!important}
-#comparison .sec-title{color:#0f172a!important}
+#comparison .sec-title{color:var(--text)!important}
 #comparison .sec-title em{color:var(--blue)!important}
-#comparison .sec-body{color:#475569!important}
-#comparison .sec-eyebrow{color:var(--blue)!important;background:rgba(74,159,212,0.1)!important;border-color:rgba(74,159,212,0.25)!important}
+#comparison .sec-body{color:var(--muted)!important}
+#comparison .sec-eyebrow{color:var(--blue)!important;background:rgba(74,159,212,0.08)!important;border-color:rgba(74,159,212,0.2)!important}
+#comparison .wrap{position:relative;z-index:2}
+#comparisonGlitter{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen}
 
 /* ── MOBILE: WHY-STAT numbers above text ── */
 @media(max-width:768px){
@@ -1077,11 +1081,12 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 <!-- ════ ABOUT ════ -->
 <section class="about-section" id="about">
-  <!-- Beam grid background -->
-  <div class="beam-bg" id="beamBg">
-    <div class="beam-floor-plane beam-floor-top">
-      <div class="beam-grid-inner"></div>
-    </div>
+  <!-- Warp background -->
+  <div class="warp-bg" id="warpBg">
+    <div class="warp-plane warp-top" id="warpTop"></div>
+    <div class="warp-plane warp-bottom" id="warpBottom"></div>
+    <div class="warp-plane warp-left" id="warpLeft"></div>
+    <div class="warp-plane warp-right" id="warpRight"></div>
   </div>
   <div class="about-inner" style="position:relative;z-index:2">
     <div class="about-card">
@@ -1211,6 +1216,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 <!-- ════ THE PROCESS ════ -->
 <section class="process" id="process">
+  <canvas id="processGlitter"></canvas>
   <div class="wrap">
     <div class="process-header fade-up">
       <div class="proc-badge">Live in 7 Days Zero Filming Required</div>
@@ -1219,10 +1225,10 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
     </div>
 
     <div class="skew-cards fade-up">
-      <!-- Step 1: indigo→blue -->
+      <!-- Step 1: deep indigo→deep navy -->
       <div class="skew-card">
-        <span class="skew-card-panel" style="background:linear-gradient(315deg,#6d28d9,#3b82f6)"></span>
-        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#6d28d9,#3b82f6)"></span>
+        <span class="skew-card-panel" style="background:linear-gradient(315deg,#3b1278,#1e3a8a)"></span>
+        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#3b1278,#1e3a8a)"></span>
         <span class="skew-card-blob-tl"></span>
         <span class="skew-card-blob-br"></span>
         <div class="skew-card-content">
@@ -1232,10 +1238,10 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
           <p>You record a 2-minute video on your phone. We build a photorealistic AI clone of your face and a perfect replica of your voice. Done once, runs forever.</p>
         </div>
       </div>
-      <!-- Step 2: cyan→teal -->
+      <!-- Step 2: deep ocean→deep teal -->
       <div class="skew-card">
-        <span class="skew-card-panel" style="background:linear-gradient(315deg,#0891b2,#0d9488)"></span>
-        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#0891b2,#0d9488)"></span>
+        <span class="skew-card-panel" style="background:linear-gradient(315deg,#0c4a6e,#065f46)"></span>
+        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#0c4a6e,#065f46)"></span>
         <span class="skew-card-blob-tl"></span>
         <span class="skew-card-blob-br"></span>
         <div class="skew-card-content">
@@ -1245,10 +1251,10 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
           <p>Our team researches trending topics in your industry every day, writing compelling platform-native scripts tailored to your niche, your voice, and your audience.</p>
         </div>
       </div>
-      <!-- Step 3: emerald→blue -->
+      <!-- Step 3: deep forest→deep violet -->
       <div class="skew-card">
-        <span class="skew-card-panel" style="background:linear-gradient(315deg,#059669,#2563eb)"></span>
-        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#059669,#2563eb)"></span>
+        <span class="skew-card-panel" style="background:linear-gradient(315deg,#14532d,#312e81)"></span>
+        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#14532d,#312e81)"></span>
         <span class="skew-card-blob-tl"></span>
         <span class="skew-card-blob-br"></span>
         <div class="skew-card-content">
@@ -1258,10 +1264,10 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
           <p>Your AI avatar is placed over B-roll. We add captions, transitions, and brand elements, then format each video natively for TikTok, Reels, Shorts, Facebook, and LinkedIn.</p>
         </div>
       </div>
-      <!-- Step 4: amber→rose -->
+      <!-- Step 4: deep amber→deep crimson -->
       <div class="skew-card">
-        <span class="skew-card-panel" style="background:linear-gradient(315deg,#d97706,#e11d48)"></span>
-        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#d97706,#e11d48)"></span>
+        <span class="skew-card-panel" style="background:linear-gradient(315deg,#92400e,#9f1239)"></span>
+        <span class="skew-card-blur"  style="background:linear-gradient(315deg,#92400e,#9f1239)"></span>
         <span class="skew-card-blob-tl"></span>
         <span class="skew-card-blob-br"></span>
         <div class="skew-card-content">
@@ -1364,9 +1370,9 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:80px 4
 
 
 <!-- ════ DIY COMPARISON ════ -->
-<section style="padding:100px 0;position:relative;overflow:hidden" id="comparison">
-  <div class="comparison-radial" style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(74,159,212,0.06),transparent 70%);pointer-events:none"></div>
-  <div class="wrap" style="position:relative;z-index:1">
+<section style="padding:100px 0" id="comparison">
+  <canvas id="comparisonGlitter"></canvas>
+  <div class="wrap">
     <div style="text-align:center;margin-bottom:64px">
       <div class="sec-eyebrow">The Real Cost of Doing It Yourself</div>
       <h2 class="sec-title">Why business owners <em>choose Silhouette</em></h2>
@@ -2251,53 +2257,76 @@ window.addEventListener('scroll', () => {
 })();
 
 // ══════════════════════════════════════════
-// BEAM GRID: We Are Silhouette background
+// WARP BACKGROUND: We Are Silhouette section
 // ══════════════════════════════════════════
 (function(){
-  const bg = document.getElementById('beamBg');
+  const bg = document.getElementById('warpBg');
   if(!bg) return;
 
-  const BEAMS_PER_SIDE = 4;
-  const BEAM_SIZE_PCT = 9; // matches grid cell size
-  const hues = [210,270,180,310,145,40];
-  const cells = Math.floor(100/BEAM_SIZE_PCT);
-  const step  = cells / BEAMS_PER_SIDE;
+  const BEAMS = 3; // beams per side
+  const BEAM_W = 5; // % width of each beam
+  const hues = [210, 270, 180, 310, 145, 60];
+  const step = Math.floor(100 / BEAM_W) / BEAMS;
 
-  function makeBeam(xPct, delay, dur, hue){
-    const el = document.createElement('div');
-    el.className = 'beam-el';
-    const ar = 2 + Math.floor(Math.random()*6);
-    el.style.cssText = [
-      `left:${xPct}%`,
-      `width:${BEAM_SIZE_PCT}%`,
-      `aspect-ratio:1/${ar}`,
-      `background:linear-gradient(hsl(${hue} 75% 62%),transparent)`,
-      `--bd:${dur.toFixed(1)}s`,
-      `--bdelay:${delay.toFixed(2)}s`
-    ].join(';');
-    return el;
+  function addBeams(planeId) {
+    const plane = document.getElementById(planeId);
+    if(!plane) return;
+    for(let pass = 0; pass < 2; pass++) {
+      for(let i = 0; i < BEAMS; i++) {
+        const xBase = Math.floor(i * step + pass * (step / 2));
+        const xPct = Math.min(xBase * BEAM_W, 95);
+        const delay = (Math.random() * 3 + pass * 0.8).toFixed(2);
+        const dur = (2.5 + Math.random() * 2.5).toFixed(1);
+        const hue = hues[(i + pass * 2) % hues.length];
+        const ar = 2 + Math.floor(Math.random() * 7);
+        const el = document.createElement('div');
+        el.className = 'warp-beam';
+        el.style.cssText = `left:${xPct}%;width:${BEAM_W}%;aspect-ratio:1/${ar};background:linear-gradient(hsl(${hue} 80% 62%),transparent);--wbd:${dur}s;--wbdelay:${delay}s`;
+        plane.appendChild(el);
+      }
+    }
   }
 
-  const floor = bg.querySelector('.beam-floor-plane');
-  if(!floor) return;
+  addBeams('warpTop');
+  addBeams('warpBottom');
+  addBeams('warpLeft');
+  addBeams('warpRight');
+})();
 
-  for(let i=0;i<BEAMS_PER_SIDE;i++){
-    const xCell = Math.floor(i * step);
-    const xPct  = xCell * BEAM_SIZE_PCT;
-    const delay  = Math.random() * 3;
-    const dur    = 2.5 + Math.random() * 2.5;
-    const hue    = hues[i % hues.length];
-    floor.appendChild(makeBeam(xPct, delay, dur, hue));
-  }
-  // second pass: offset beams for density
-  for(let i=0;i<BEAMS_PER_SIDE;i++){
-    const xCell = Math.floor(i * step) + Math.floor(step/2);
-    const xPct  = Math.min(xCell * BEAM_SIZE_PCT, 95);
-    const delay  = 1 + Math.random() * 3;
-    const dur    = 3 + Math.random() * 2;
-    const hue    = hues[(i+2) % hues.length];
-    floor.appendChild(makeBeam(xPct, delay, dur, hue));
-  }
+// ══════════════════════════════════════════
+// GLITTER CANVAS: process section
+// ══════════════════════════════════════════
+(function(){
+  const canvas = document.getElementById('processGlitter');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  const PARTICLES = 160;
+  let sparks = [];
+  function resize(){ const s=canvas.parentElement; w=canvas.width=s.offsetWidth; h=canvas.height=s.offsetHeight; }
+  function rand(a,b){ return a+Math.random()*(b-a); }
+  function init(){ sparks=[]; for(let i=0;i<PARTICLES;i++) sparks.push({x:rand(0,w),y:rand(0,h),size:rand(0.5,2.5),speed:rand(0.004,0.025),phase:rand(0,Math.PI*2),color:`hsl(${rand(190,230)},${rand(60,100)}%,${rand(75,100)}%)`}); }
+  function draw(){ ctx.clearRect(0,0,w,h); const t=performance.now()/1000; sparks.forEach(s=>{ const a=Math.pow(Math.max(0,Math.sin(t*s.speed*Math.PI*2+s.phase)),12); if(a<0.01)return; ctx.save(); ctx.globalAlpha=a*0.9; ctx.shadowBlur=s.size*8; ctx.shadowColor=s.color; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s.x,s.y,s.size,0,Math.PI*2); ctx.fill(); ctx.restore(); }); requestAnimationFrame(draw); }
+  resize(); init(); draw();
+  window.addEventListener('resize',()=>{ resize(); init(); });
+})();
+
+// ══════════════════════════════════════════
+// GLITTER CANVAS: comparison section
+// ══════════════════════════════════════════
+(function(){
+  const canvas = document.getElementById('comparisonGlitter');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  const PARTICLES = 160;
+  let sparks = [];
+  function resize(){ const s=canvas.parentElement; w=canvas.width=s.offsetWidth; h=canvas.height=s.offsetHeight; }
+  function rand(a,b){ return a+Math.random()*(b-a); }
+  function init(){ sparks=[]; for(let i=0;i<PARTICLES;i++) sparks.push({x:rand(0,w),y:rand(0,h),size:rand(0.5,2.5),speed:rand(0.004,0.025),phase:rand(0,Math.PI*2),color:`hsl(${rand(190,230)},${rand(60,100)}%,${rand(75,100)}%)`}); }
+  function draw(){ ctx.clearRect(0,0,w,h); const t=performance.now()/1000; sparks.forEach(s=>{ const a=Math.pow(Math.max(0,Math.sin(t*s.speed*Math.PI*2+s.phase)),12); if(a<0.01)return; ctx.save(); ctx.globalAlpha=a*0.9; ctx.shadowBlur=s.size*8; ctx.shadowColor=s.color; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s.x,s.y,s.size,0,Math.PI*2); ctx.fill(); ctx.restore(); }); requestAnimationFrame(draw); }
+  resize(); init(); draw();
+  window.addEventListener('resize',()=>{ resize(); init(); });
 })();
 
 // ══════════════════════════════════════════
